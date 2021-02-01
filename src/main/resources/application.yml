@@ -8,7 +8,19 @@ spring:
       minimum-idle: 5
       maximum-pool-size: 1000
       pool-name: DatebookHikariCP
-    url: jdbc:mysql://10.0.4.139:3306/swtest?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-    password: tester
-    username: tester
+    url: jdbc:mysql://10.6.4.64:3306/admin?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    password: laiyifen123456
+    username: root
     type: com.zaxxer.hikari.HikariDataSource
+server:
+  port: 8081
+
+mybatis:
+  type-aliases-package: org.marsken.plantform.infrastructure.dataobject
+  configuration:
+    map-underscore-to-camel-case: 'true'
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: 'classpath*:mapper/*.xml'
+
+######################### cros #########################
+access-control-allow-origin: '*'

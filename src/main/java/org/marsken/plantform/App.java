@@ -1,8 +1,8 @@
 package org.marsken.plantform;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @author ：MarsKen
@@ -12,9 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @version: 1.0.0$
  */
 @SpringBootApplication
+@MapperScan(basePackages={"org.marsken.plantform.infrastructure.mapper"})
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
-        System.out.println(new BCryptPasswordEncoder().encode("admin"));
     }
 }

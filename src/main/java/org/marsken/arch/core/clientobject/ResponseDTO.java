@@ -19,44 +19,44 @@ import java.io.Serializable;
 @Data
 @ApiModel("通用响应对象")
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class Response<T> implements Serializable {
+public class ResponseDTO<T> implements Serializable {
 
     private static final long serialVersionUID = -4505655308965878999L;
 
     //请求成功返回码为：0
-    private static final String successCode = "0";
+    private static final Integer successCode = 0;
     //返回数据
     @ApiModelProperty(value = "返回的业务对象")
     private T data;
     //返回码
     @ApiModelProperty(value = "错误代码，0--成功，其他失败", example = "0")
-    private String code;
+    private Integer code;
     //返回描述
     @ApiModelProperty(value = "返回信息描述", example = "success")
     private Object msg;
 
-    private Response() {
+    private ResponseDTO() {
         this.code = successCode;
         this.msg =  "success";
     }
 
-    private Response success(T data) {
+    private ResponseDTO success(T data) {
         this.data = data;
         return this;
     }
 
-    private Response fail(String code, Object msg) {
+    private ResponseDTO fail(Integer code, Object msg) {
         this.code = code;
         this.msg = msg;
         return this;
     }
 
-    public static Response builderSuccess(Object o) {
-        return new Response().success(o);
+    public static ResponseDTO builderSuccess(Object o) {
+        return new ResponseDTO().success(o);
     }
 
-    public static Response builderFail(String code, Object msg) {
-        return new Response().fail(code, msg);
+    public static ResponseDTO builderFail(Integer code, Object msg) {
+        return new ResponseDTO().fail(code, msg);
     }
 
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.marsken.plantform.infrastructure.mapper.EmployeeMapper">
+
+
+    <sql id="Base_Colum_List">
+        id
+        ,
+        login_name,
+        login_pwd,
+        actual_name,
+        nick_name,
+        phone,
+        id_card,
+        birthday,
+        email,
+        department_id,
+        is_leave,
+        is_disabled,
+        remark,
+        create_user,
+        update_time,
+        create_time,
+        is_delete
+    </sql>
+
+    <select id="findAll" resultType="org.marsken.plantform.infrastructure.dataobject.EmployeeDO">
+        select
+        <include refid="Base_Colum_List"/>
+        from t_employee
+    </select>
+    <select id="findByLoginNameAndLoginPwd" resultType="org.marsken.plantform.infrastructure.dataobject.EmployeeDO">
+        select
+        <include refid="Base_Colum_List"/>
+        from t_employee
+        where login_name = #{loginName}
+        and login_pwd = #{loginPwd}
+    </select>
+
+</mapper>
