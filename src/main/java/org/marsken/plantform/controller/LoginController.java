@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
@@ -45,6 +46,11 @@ public class LoginController {
         String requestToken = request.getHeader("x-access-token");
         LoginDetailDTO loginDetailDTO = loginService.findByToken(requestToken);
         return ResponseDTO.builderSuccess(loginDetailDTO);
+    }
+
+    @GetMapping(value = "session/logOut")
+    public ResponseDTO<Boolean> logout(@RequestParam(name = "x-access-token") String token) {
+        return ResponseDTO.builderSuccess(loginService.logout(token));
     }
 
 

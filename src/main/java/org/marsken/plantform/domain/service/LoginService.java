@@ -15,4 +15,6 @@ public interface LoginService {
 
     LoginDetailDTO findByToken(String token);
 
+    Boolean logout(String token);
+
 }

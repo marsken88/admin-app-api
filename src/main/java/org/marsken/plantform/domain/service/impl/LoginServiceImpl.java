@@ -29,6 +29,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class LoginServiceImpl implements LoginService {
+
     @Override
     public LoginDetailDTO login(String loginName, String loginPwd) {
         String encryptPassword = AdminDigestUtil.encryptPassword(CommonConstant.SALT_FORMAT, loginPwd);
@@ -54,22 +55,32 @@ public class LoginServiceImpl implements LoginService {
             loginPrivilegeDTOList.add(loginPrivilegeDTO);
         }
         loginDetailDTO.setPrivilegeList(loginPrivilegeDTOList);
-        stringRedisTemplate.opsForValue().set(loginDetailDTO.getId().toString(), new Gson().toJson(loginDetailDTO), 60L, TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set(loginDetailDTO.getLoginName(), new Gson().toJson(loginDetailDTO), 60L, TimeUnit.SECONDS);
         return loginDetailDTO;
     }
 
     @Override
     public LoginDetailDTO findByToken(String token) {
-        String strUserId = tokenService.parsToken(token);
-        if(Objects.nonNull(strUserId)){
-            String result = stringRedisTemplate.opsForValue().get(strUserId);
+        String loginName = tokenService.parsToken(token);
+        if (Objects.nonNull(loginName)) {
+            String result = stringRedisTemplate.opsForValue().get(loginName);
             if (Objects.nonNull(result)) {
-                Gson gson = new Gson();
-                LoginDetailDTO loginDetailDTO = gson.fromJson(result, LoginDetailDTO.class);
+                LoginDetailDTO loginDetailDTO = new Gson().fromJson(result, LoginDetailDTO.class);
                 return loginDetailDTO;
             }
         }
         return null;
+    }
+
+    @Override
+    public Boolean logout(String token) {
+        try {
+            String loginName = tokenService.parsToken(token);
+            stringRedisTemplate.delete(loginName);
+        } catch (Exception e) {
+
+        }
+        return Boolean.TRUE;
     }
 
     @Autowired
