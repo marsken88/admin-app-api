@@ -1,5 +1,6 @@
 package org.marsken.plantform.domain.service.impl;
 
+import com.google.gson.Gson;
 import org.marsken.plantform.controller.dto.LoginDetailDTO;
 import org.marsken.plantform.controller.dto.LoginPrivilegeDTO;
 import org.marsken.plantform.domain.constant.CommonConstant;
@@ -11,10 +12,13 @@ import org.marsken.plantform.infrastructure.dataobject.PrivilegeDO;
 import org.marsken.plantform.infrastructure.mapper.EmployeeMapper;
 import org.marsken.plantform.infrastructure.mapper.PrivilegeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author ：MarsKen
@@ -50,10 +54,26 @@ public class LoginServiceImpl implements LoginService {
             loginPrivilegeDTOList.add(loginPrivilegeDTO);
         }
         loginDetailDTO.setPrivilegeList(loginPrivilegeDTOList);
-
+        stringRedisTemplate.opsForValue().set(loginDetailDTO.getId().toString(), new Gson().toJson(loginDetailDTO), 60L, TimeUnit.SECONDS);
         return loginDetailDTO;
     }
 
+    @Override
+    public LoginDetailDTO findByToken(String token) {
+        String strUserId = tokenService.parsToken(token);
+        if(Objects.nonNull(strUserId)){
+            String result = stringRedisTemplate.opsForValue().get(strUserId);
+            if (Objects.nonNull(result)) {
+                Gson gson = new Gson();
+                LoginDetailDTO loginDetailDTO = gson.fromJson(result, LoginDetailDTO.class);
+                return loginDetailDTO;
+            }
+        }
+        return null;
+    }
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     private TokenService tokenService;

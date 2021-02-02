@@ -18,7 +18,12 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public String generateToken(EmployeeDO employeeDO) {
-        JwtUtil.createJWT(employeeDO.getId(), "marsken", employeeDO.getLoginName(), 6000L);
-        return null;
+        String token = JwtUtil.createJWT(employeeDO.getLoginName());
+        return token;
+    }
+
+    @Override
+    public String parsToken(String token) {
+        return JwtUtil.parseJWT(token).get("loginName").toString();
     }
 }

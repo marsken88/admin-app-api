@@ -19,10 +19,4 @@ public class AdminDigestUtil extends DigestUtils {
         return AdminDigestUtil.md5DigestAsHex(String.format(salt, password).getBytes(StandardCharsets.UTF_8));
     }
 
-    public static void main(String[] args) {
-        String encryptPassword = AdminDigestUtil.encryptPassword(CommonConstant.SALT_FORMAT, "123456");
-        String encryptPassword1 = AdminDigestUtil.encryptPassword(CommonConstant.SALT_FORMAT, "888888");
-        System.out.println(encryptPassword);
-        System.out.println(encryptPassword1);
-    }
 }

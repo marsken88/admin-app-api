@@ -12,4 +12,6 @@ import org.marsken.plantform.infrastructure.dataobject.EmployeeDO;
 public interface TokenService {
 
     String generateToken(EmployeeDO employeeDO);
+
+    String parsToken(String token);
 }

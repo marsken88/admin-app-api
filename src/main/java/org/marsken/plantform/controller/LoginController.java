@@ -42,16 +42,10 @@ public class LoginController {
 
     @GetMapping(value = "/session/get")
     public ResponseDTO<LoginDetailDTO> get(HttpServletRequest request) {
-        LoginDetailDTO loginDetailDTO = new LoginDetailDTO();
-        loginDetailDTO.setId(1L);
-        loginDetailDTO.setLoginName("demo");
-        loginDetailDTO.setNickName("demo");
-        loginDetailDTO.setActualName("demo");
-        loginDetailDTO.setIsSuperMan(Boolean.TRUE);
-        loginDetailDTO.setXAccessToken(request.getHeader("x-access-token"));
+        String requestToken = request.getHeader("x-access-token");
+        LoginDetailDTO loginDetailDTO = loginService.findByToken(requestToken);
         return ResponseDTO.builderSuccess(loginDetailDTO);
     }
-
 
 
     @GetMapping(value = "/session/verificationCode")

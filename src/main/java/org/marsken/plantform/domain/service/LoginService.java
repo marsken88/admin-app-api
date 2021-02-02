@@ -12,4 +12,7 @@ import org.marsken.plantform.controller.dto.LoginDetailDTO;
 public interface LoginService {
 
     LoginDetailDTO login(String loginName, String loginPwd);
+
+    LoginDetailDTO findByToken(String token);
+
 }

@@ -12,6 +12,19 @@ spring:
     password: laiyifen123456
     username: root
     type: com.zaxxer.hikari.HikariDataSource
+  redis:
+    password: 123456
+    lettuce:
+      pool:
+        max-active: 200
+        min-idle: 8
+        max-wait: 30
+        max-idle: 8
+      shutdown-timeout: 100
+    host: '10.6.4.64'
+    port: 6379
+#    cluster:
+#      nodes: '10.6.4.64:6379'
 server:
   port: 8081
 
@@ -21,6 +34,7 @@ mybatis:
     map-underscore-to-camel-case: 'true'
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: 'classpath*:mapper/*.xml'
+
 
 ######################### cros #########################
 access-control-allow-origin: '*'
