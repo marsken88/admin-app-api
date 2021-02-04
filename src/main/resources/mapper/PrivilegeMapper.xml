@@ -7,7 +7,7 @@
         id,
         type,
         name,
-        'key',
+        `key`,
         url,
         sort,
         parent_key,

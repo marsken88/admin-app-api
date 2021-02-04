@@ -48,7 +48,7 @@ public class LoginController {
         return ResponseDTO.builderSuccess(loginDetailDTO);
     }
 
-    @GetMapping(value = "session/logOut")
+    @GetMapping(value = "/session/logOut")
     public ResponseDTO<Boolean> logout(@RequestParam(name = "x-access-token") String token) {
         return ResponseDTO.builderSuccess(loginService.logout(token));
     }

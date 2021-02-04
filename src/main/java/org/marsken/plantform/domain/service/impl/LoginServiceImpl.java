@@ -1,12 +1,15 @@
 package org.marsken.plantform.domain.service.impl;
 
 import com.google.gson.Gson;
+import org.apache.commons.collections.CollectionUtils;
 import org.marsken.plantform.controller.dto.LoginDetailDTO;
 import org.marsken.plantform.controller.dto.LoginPrivilegeDTO;
 import org.marsken.plantform.domain.constant.CommonConstant;
+import org.marsken.plantform.domain.constant.PrivilegeTypeEnum;
 import org.marsken.plantform.domain.service.LoginService;
 import org.marsken.plantform.domain.service.TokenService;
 import org.marsken.plantform.domain.util.AdminDigestUtil;
+import org.marsken.plantform.domain.util.AdminStringUtil;
 import org.marsken.plantform.infrastructure.dataobject.EmployeeDO;
 import org.marsken.plantform.infrastructure.dataobject.PrivilegeDO;
 import org.marsken.plantform.infrastructure.mapper.EmployeeMapper;
@@ -16,9 +19,12 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * @author ：MarsKen
@@ -54,6 +60,7 @@ public class LoginServiceImpl implements LoginService {
             loginPrivilegeDTO.setParentKey(privilegeDO.getParentKey());
             loginPrivilegeDTOList.add(loginPrivilegeDTO);
         }
+
         loginDetailDTO.setPrivilegeList(loginPrivilegeDTOList);
         stringRedisTemplate.opsForValue().set(loginDetailDTO.getLoginName(), new Gson().toJson(loginDetailDTO), 60L, TimeUnit.SECONDS);
         return loginDetailDTO;

@@ -1,5 +1,9 @@
 package org.marsken.plantform.controller;
 
+import org.marsken.arch.core.clientobject.PageResultDTO;
+import org.marsken.arch.core.clientobject.ResponseDTO;
+import org.marsken.plantform.controller.dto.EmployeeDTO;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,6 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class EmployeeController {
+
+    @PostMapping(value = "/employee/query")
+    public ResponseDTO<PageResultDTO<EmployeeDTO>> query(){
+        return ResponseDTO.builderSuccess(null);
+    }
 
 
 }

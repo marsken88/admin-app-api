@@ -8,31 +8,20 @@ package org.marsken.arch.core.clientobject;
  * @version: 1.0.0$
  */
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.io.Serializable;
 
 
 @Data
 @ApiModel("通用响应对象")
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class ResponseDTO<T> implements Serializable {
+public class ResponseDTO<T> {
 
-    private static final long serialVersionUID = -4505655308965878999L;
 
-    //请求成功返回码为：0
     private static final Integer successCode = 0;
-    //返回数据
-    @ApiModelProperty(value = "返回的业务对象")
     private T data;
-    //返回码
-    @ApiModelProperty(value = "错误代码，0--成功，其他失败", example = "0")
+
     private Integer code;
-    //返回描述
-    @ApiModelProperty(value = "返回信息描述", example = "success")
+
     private Object msg;
 
     private ResponseDTO() {

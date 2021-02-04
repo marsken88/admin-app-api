@@ -1,5 +1,6 @@
 package org.marsken.arch.core.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @modified By：
  * @version: 1.0.0$
  */
+@Slf4j
 @RestController
 public class CustomErrorController {
 }

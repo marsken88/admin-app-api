@@ -1,7 +1,12 @@
 package org.marsken.arch.core.advice;
 
 import lombok.extern.slf4j.Slf4j;
+import org.marsken.arch.core.clientobject.ResponseDTO;
+import org.marsken.arch.core.common.CodeMessage;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * @author ：MarsKen
@@ -13,5 +18,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @Slf4j
 @ControllerAdvice
 public class BizControllerAdvice {
+
+    @ExceptionHandler({Exception.class})
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseDTO<Void> uniteExceptionHandler(Exception e) {
+        log.error("系统异常", e);
+        return ResponseDTO.builderFail(CodeMessage.EXCEPTION.getCode(), e.getMessage());
+    }
 
 }
