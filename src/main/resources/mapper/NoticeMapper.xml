@@ -37,8 +37,10 @@
         from t_notice
         where send_status = 1
     </select>
+
     <update id="deleteById">
         update t_notice set deleted = 1 where id = #{id}
     </update>
+
 
 </mapper>

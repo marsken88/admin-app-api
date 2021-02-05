@@ -52,6 +52,11 @@ public class NoticeController {
         return ResponseDTO.builderSuccess(noticeService.deleteById(id));
     }
 
+    @GetMapping(value = "/notice/send/{id}")
+    public ResponseDTO<Boolean> sendById(@PathVariable Long id) {
+        return ResponseDTO.builderSuccess(noticeService.deleteById(id));
+    }
+
     @Autowired
     private NoticeService noticeService;
 }

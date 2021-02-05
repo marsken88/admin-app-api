@@ -22,4 +22,5 @@ public interface NoticeMapper {
     NoticeDO findById(Long id);
 
     Integer deleteById(Long id);
+
 }

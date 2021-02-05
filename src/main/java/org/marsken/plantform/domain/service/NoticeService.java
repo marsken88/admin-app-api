@@ -24,4 +24,6 @@ public interface NoticeService {
     NoticeDTO readById(Long id);
 
     Boolean deleteById(Long id);
+
+    Boolean sendById(Long id);
 }

@@ -91,6 +91,11 @@ public class NoticeServiceImpl implements NoticeService {
         return Boolean.TRUE;
     }
 
+    @Override
+    public Boolean sendById(Long id) {
+        return Boolean.TRUE;
+    }
+
     @Autowired
     private NoticeMapper noticeMapper;
 }
