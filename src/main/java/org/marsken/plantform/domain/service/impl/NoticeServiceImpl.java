@@ -3,8 +3,10 @@ package org.marsken.plantform.domain.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.marsken.plantform.controller.dto.NoticeAddDTO;
 import org.marsken.plantform.controller.dto.NoticeDTO;
 import org.marsken.plantform.controller.dto.NoticeQueryDTO;
+import org.marsken.plantform.domain.constant.JudgeEnum;
 import org.marsken.plantform.domain.service.NoticeService;
 import org.marsken.plantform.infrastructure.dataobject.NoticeDO;
 import org.marsken.plantform.infrastructure.mapper.NoticeMapper;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -93,6 +96,20 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public Boolean sendById(Long id) {
+        return Boolean.TRUE;
+    }
+
+    @Override
+    public Boolean save(NoticeAddDTO noticeAddDTO) {
+        NoticeDO noticeDO  = new NoticeDO();
+        noticeDO.setContent(noticeAddDTO.getContent());
+        noticeDO.setTitle(noticeAddDTO.getTitle());
+        noticeDO.setDeleted(JudgeEnum.NO.getValue());
+        noticeDO.setSendStatus(JudgeEnum.NO.getValue());
+        noticeDO.setCreateTime(new Date());
+        noticeDO.setUpdateTime(new Date());
+        noticeDO.setCreatUser(1L);
+        noticeMapper.save(noticeDO);
         return Boolean.TRUE;
     }
 

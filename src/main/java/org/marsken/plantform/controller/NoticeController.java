@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
 import org.marsken.arch.core.clientobject.PageResultDTO;
 import org.marsken.arch.core.clientobject.ResponseDTO;
+import org.marsken.plantform.controller.dto.NoticeAddDTO;
 import org.marsken.plantform.controller.dto.NoticeDTO;
 import org.marsken.plantform.controller.dto.NoticeQueryDTO;
 import org.marsken.plantform.domain.service.NoticeService;
@@ -54,7 +55,12 @@ public class NoticeController {
 
     @GetMapping(value = "/notice/send/{id}")
     public ResponseDTO<Boolean> sendById(@PathVariable Long id) {
-        return ResponseDTO.builderSuccess(noticeService.deleteById(id));
+        return ResponseDTO.builderSuccess(noticeService.sendById(id));
+    }
+
+    @PostMapping(value = "/notice/add")
+    public ResponseDTO<Boolean> save(@RequestBody NoticeAddDTO noticeAddDTO) {
+        return ResponseDTO.builderSuccess(noticeService.save(noticeAddDTO));
     }
 
     @Autowired

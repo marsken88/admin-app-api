@@ -1,10 +1,9 @@
 package org.marsken.plantform.domain.service;
 
 import com.github.pagehelper.PageInfo;
+import org.marsken.plantform.controller.dto.NoticeAddDTO;
 import org.marsken.plantform.controller.dto.NoticeDTO;
 import org.marsken.plantform.controller.dto.NoticeQueryDTO;
-
-import java.util.List;
 
 /**
  * @author ：MarsKen
@@ -26,4 +25,6 @@ public interface NoticeService {
     Boolean deleteById(Long id);
 
     Boolean sendById(Long id);
+
+    Boolean save(NoticeAddDTO noticeAddDTO);
 }

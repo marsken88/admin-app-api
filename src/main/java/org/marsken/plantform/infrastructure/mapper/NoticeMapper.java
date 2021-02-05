@@ -23,4 +23,6 @@ public interface NoticeMapper {
 
     Integer deleteById(Long id);
 
+    Integer save(NoticeDO noticeDO);
+
 }

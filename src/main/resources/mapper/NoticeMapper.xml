@@ -4,7 +4,8 @@
 
 
     <sql id="Base_Colum_List">
-        id,
+        id
+        ,
         title,
         content,
         deleted,
@@ -39,8 +40,16 @@
     </select>
 
     <update id="deleteById">
-        update t_notice set deleted = 1 where id = #{id}
+        update t_notice
+        set deleted = 1
+        where id = #{id}
     </update>
+
+    <insert id="save">
+        insert into t_notice (title, content, deleted, send_status, create_user, update_time, create_time)
+        values (#{title}, #{content}, #{deleted}, #{sendStatus}, #{creatUser}, #{updateTime}, #{createTime})
+
+    </insert>
 
 
 </mapper>
