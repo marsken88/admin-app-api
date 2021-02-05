@@ -15,7 +15,13 @@ import java.util.List;
  */
 public interface NoticeService {
 
+    PageInfo<NoticeDTO> findUnReadByPage(NoticeQueryDTO noticeQueryDTO);
+
     PageInfo<NoticeDTO> findNoticeByPage(NoticeQueryDTO noticeQueryDTO);
 
     NoticeDTO findById(Long id);
+
+    NoticeDTO readById(Long id);
+
+    Boolean deleteById(Long id);
 }

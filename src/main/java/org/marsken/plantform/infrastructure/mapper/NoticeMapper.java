@@ -15,7 +15,11 @@ import java.util.List;
  */
 public interface NoticeMapper {
 
+    List<NoticeDO> findUnReadByPage();
+
     List<NoticeDO> findByPage(NoticeQueryDTO noticeQueryDTO);
 
     NoticeDO findById(Long id);
+
+    Integer deleteById(Long id);
 }

@@ -24,6 +24,25 @@ import java.util.List;
 @Service
 public class NoticeServiceImpl implements NoticeService {
     @Override
+    public PageInfo<NoticeDTO> findUnReadByPage(NoticeQueryDTO noticeQueryDTO) {
+        Page page = PageHelper.startPage(noticeQueryDTO.getPageNum(), noticeQueryDTO.getPageSize());
+        List<NoticeDO> noticeDOList = noticeMapper.findUnReadByPage();
+        List<NoticeDTO> noticeDTOList = new ArrayList<>();
+        for (NoticeDO noticeDO : noticeDOList) {
+            NoticeDTO noticeDTO = new NoticeDTO();
+            noticeDTO.setId(noticeDO.getId());
+            noticeDTO.setTitle(noticeDO.getTitle());
+//            noticeDTO.setCreateUserName(noticeDO.getCreatUser());
+            noticeDTO.setSendStatus(noticeDO.getSendStatus());
+            noticeDTO.setCreateTime(noticeDO.getCreateTime());
+            noticeDTOList.add(noticeDTO);
+        }
+        PageInfo pageInfo = new PageInfo(page.getResult());
+        pageInfo.setList(noticeDTOList);
+        return pageInfo;
+    }
+
+    @Override
     public PageInfo<NoticeDTO> findNoticeByPage(NoticeQueryDTO noticeQueryDTO) {
         Page page = PageHelper.startPage(noticeQueryDTO.getPageNum(), noticeQueryDTO.getPageSize());
         List<NoticeDO> noticeDOList = noticeMapper.findByPage(noticeQueryDTO);
@@ -34,7 +53,8 @@ public class NoticeServiceImpl implements NoticeService {
             noticeDTO.setTitle(noticeDO.getTitle());
 //            noticeDTO.setCreateUserName(noticeDO.getCreatUser());
             noticeDTO.setSendStatus(noticeDO.getSendStatus());
-//            noticeDTO.setCreateTime(noticeDO.get());
+            noticeDTO.setCreateTime(noticeDO.getCreateTime());
+            noticeDTO.setUpdateTime(noticeDO.getUpdateTime());
             noticeDTOList.add(noticeDTO);
         }
         PageInfo pageInfo = new PageInfo(page.getResult());
@@ -50,6 +70,25 @@ public class NoticeServiceImpl implements NoticeService {
         noticeDTO.setUpdateTime(noticeDO.getUpdateTime());
         noticeDTO.setContent(noticeDO.getContent());
         return noticeDTO;
+    }
+
+    @Override
+    public NoticeDTO readById(Long id) {
+        NoticeDO noticeDO = noticeMapper.findById(id);
+        NoticeDTO noticeDTO = new NoticeDTO();
+        noticeDTO.setId(noticeDO.getId());
+        noticeDTO.setTitle(noticeDO.getTitle());
+//            noticeDTO.setCreateUserName(noticeDO.getCreatUser());
+        noticeDTO.setSendStatus(noticeDO.getSendStatus());
+        noticeDTO.setCreateTime(noticeDO.getCreateTime());
+        noticeDTO.setUpdateTime(noticeDO.getUpdateTime());
+        return noticeDTO;
+    }
+
+    @Override
+    public Boolean deleteById(Long id) {
+        noticeMapper.deleteById(id);
+        return Boolean.TRUE;
     }
 
     @Autowired

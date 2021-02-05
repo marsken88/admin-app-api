@@ -28,14 +28,8 @@ public class NoticeController {
 
     @ApiOperation(value = "分页查询未读消息")
     @PostMapping("/notice/unread/page/query")
-    public ResponseDTO<PageResultDTO> queryUnreadByPage() {
-        PageResultDTO pageResultDTO = new PageResultDTO();
-        pageResultDTO.setPageNum(1L);
-        pageResultDTO.setPageSize(20L);
-        pageResultDTO.setTotal(0L);
-        pageResultDTO.setPages(0L);
-        pageResultDTO.setList(new ArrayList());
-        return ResponseDTO.builderSuccess(pageResultDTO);
+    public ResponseDTO<PageInfo<NoticeDTO>> queryUnreadByPage(@RequestBody NoticeQueryDTO noticeQueryDTO) {
+        return ResponseDTO.builderSuccess(noticeService.findUnReadByPage(noticeQueryDTO));
     }
 
     @PostMapping(value = "/notice/page/query")
@@ -46,6 +40,16 @@ public class NoticeController {
     @GetMapping(value = "/notice/detail/{id}")
     public ResponseDTO<NoticeDTO> findById(@PathVariable Long id) {
         return ResponseDTO.builderSuccess(noticeService.findById(id));
+    }
+
+    @GetMapping(value = "/notice/read/{id}")
+    public ResponseDTO<NoticeDTO> readById(@PathVariable Long id) {
+        return ResponseDTO.builderSuccess(noticeService.readById(id));
+    }
+
+    @GetMapping(value = "/notice/delete/{id}")
+    public ResponseDTO<Boolean> deleteById(@PathVariable Long id) {
+        return ResponseDTO.builderSuccess(noticeService.deleteById(id));
     }
 
     @Autowired

@@ -18,16 +18,27 @@
         select
         <include refid="Base_Colum_List"/>
         from t_notice
-        where deleted = 1
+        where deleted = 0
         <if test="title != null and title != ''">
             and title like "%"#{title}"%"
         </if>
     </select>
+
     <select id="findById" resultType="org.marsken.plantform.infrastructure.dataobject.NoticeDO">
         select
         <include refid="Base_Colum_List"/>
         from t_notice
         where id = #{id}
     </select>
+
+    <select id="findUnReadByPage" resultType="org.marsken.plantform.infrastructure.dataobject.NoticeDO">
+        select
+        <include refid="Base_Colum_List"/>
+        from t_notice
+        where send_status = 1
+    </select>
+    <update id="deleteById">
+        update t_notice set deleted = 1 where id = #{id}
+    </update>
 
 </mapper>
