@@ -16,4 +16,6 @@ import java.util.List;
 public interface NoticeMapper {
 
     List<NoticeDO> findByPage(NoticeQueryDTO noticeQueryDTO);
+
+    NoticeDO findById(Long id);
 }

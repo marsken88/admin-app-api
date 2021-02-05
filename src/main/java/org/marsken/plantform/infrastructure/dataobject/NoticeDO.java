@@ -2,6 +2,8 @@ package org.marsken.plantform.infrastructure.dataobject;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author ：MarsKen
  * @date ：Created in 2021/2/5 2:11 下午
@@ -22,5 +24,9 @@ public class NoticeDO {
     private Integer sendStatus;
 
     private Integer deleted;
+
+    private Date updateTime;
+
+    private Date createTime;
 
 }

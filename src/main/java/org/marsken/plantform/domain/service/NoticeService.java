@@ -16,4 +16,6 @@ import java.util.List;
 public interface NoticeService {
 
     PageInfo<NoticeDTO> findNoticeByPage(NoticeQueryDTO noticeQueryDTO);
+
+    NoticeDTO findById(Long id);
 }

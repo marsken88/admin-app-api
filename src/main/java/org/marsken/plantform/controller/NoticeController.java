@@ -8,6 +8,8 @@ import org.marsken.plantform.controller.dto.NoticeDTO;
 import org.marsken.plantform.controller.dto.NoticeQueryDTO;
 import org.marsken.plantform.domain.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,8 +39,13 @@ public class NoticeController {
     }
 
     @PostMapping(value = "/notice/page/query")
-    public ResponseDTO<PageInfo<NoticeDTO>> findByPage(@RequestBody NoticeQueryDTO noticeQueryDTO){
+    public ResponseDTO<PageInfo<NoticeDTO>> findByPage(@RequestBody NoticeQueryDTO noticeQueryDTO) {
         return ResponseDTO.builderSuccess(noticeService.findNoticeByPage(noticeQueryDTO));
+    }
+
+    @GetMapping(value = "/notice/detail/{id}")
+    public ResponseDTO<NoticeDTO> findById(@PathVariable Long id) {
+        return ResponseDTO.builderSuccess(noticeService.findById(id));
     }
 
     @Autowired

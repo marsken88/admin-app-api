@@ -42,6 +42,16 @@ public class NoticeServiceImpl implements NoticeService {
         return pageInfo;
     }
 
+    @Override
+    public NoticeDTO findById(Long id) {
+        NoticeDO noticeDO = noticeMapper.findById(id);
+        NoticeDTO noticeDTO = new NoticeDTO();
+//        noticeDTO.setId(noticeDO.getId());
+        noticeDTO.setUpdateTime(noticeDO.getUpdateTime());
+        noticeDTO.setContent(noticeDO.getContent());
+        return noticeDTO;
+    }
+
     @Autowired
     private NoticeMapper noticeMapper;
 }

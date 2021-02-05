@@ -6,6 +6,7 @@
     <sql id="Base_Colum_List">
         id,
         title,
+        content,
         deleted,
         send_status,
         create_user,
@@ -21,6 +22,12 @@
         <if test="title != null and title != ''">
             and title like "%"#{title}"%"
         </if>
+    </select>
+    <select id="findById" resultType="org.marsken.plantform.infrastructure.dataobject.NoticeDO">
+        select
+        <include refid="Base_Colum_List"/>
+        from t_notice
+        where id = #{id}
     </select>
 
 </mapper>
