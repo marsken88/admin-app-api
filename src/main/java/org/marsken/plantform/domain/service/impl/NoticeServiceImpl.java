@@ -69,9 +69,13 @@ public class NoticeServiceImpl implements NoticeService {
     public NoticeDTO findById(Long id) {
         NoticeDO noticeDO = noticeMapper.findById(id);
         NoticeDTO noticeDTO = new NoticeDTO();
-//        noticeDTO.setId(noticeDO.getId());
+        noticeDTO.setId(noticeDO.getId());
+        noticeDTO.setTitle(noticeDO.getTitle());
+//            noticeDTO.setCreateUserName(noticeDO.getCreatUser());
+        noticeDTO.setSendStatus(noticeDO.getSendStatus());
+        noticeDTO.setCreateTime(noticeDO.getCreateTime());
         noticeDTO.setUpdateTime(noticeDO.getUpdateTime());
-        noticeDTO.setContent(noticeDO.getContent());
+        noticeDO.setContent(noticeDO.getContent());
         return noticeDTO;
     }
 
