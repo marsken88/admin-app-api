@@ -1,14 +1,18 @@
 package org.marsken.plantform.controller;
 
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
 import org.marsken.arch.core.clientobject.PageResultDTO;
 import org.marsken.arch.core.clientobject.ResponseDTO;
 import org.marsken.plantform.controller.dto.NoticeDTO;
+import org.marsken.plantform.controller.dto.NoticeQueryDTO;
+import org.marsken.plantform.domain.service.NoticeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * @author ：MarsKen
@@ -32,4 +36,11 @@ public class NoticeController {
         return ResponseDTO.builderSuccess(pageResultDTO);
     }
 
+    @PostMapping(value = "/notice/page/query")
+    public ResponseDTO<PageInfo<NoticeDTO>> findByPage(@RequestBody NoticeQueryDTO noticeQueryDTO){
+        return ResponseDTO.builderSuccess(noticeService.findNoticeByPage(noticeQueryDTO));
+    }
+
+    @Autowired
+    private NoticeService noticeService;
 }
