@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import org.marsken.plantform.controller.dto.NoticeAddDTO;
 import org.marsken.plantform.controller.dto.NoticeDTO;
 import org.marsken.plantform.controller.dto.NoticeQueryDTO;
+import org.marsken.plantform.convertor.NoticeConvertor;
 import org.marsken.plantform.domain.constant.JudgeEnum;
 import org.marsken.plantform.domain.service.NoticeService;
 import org.marsken.plantform.infrastructure.dataobject.NoticeDO;
@@ -30,18 +31,8 @@ public class NoticeServiceImpl implements NoticeService {
     public PageInfo<NoticeDTO> findUnReadByPage(NoticeQueryDTO noticeQueryDTO) {
         Page page = PageHelper.startPage(noticeQueryDTO.getPageNum(), noticeQueryDTO.getPageSize());
         List<NoticeDO> noticeDOList = noticeMapper.findUnReadByPage();
-        List<NoticeDTO> noticeDTOList = new ArrayList<>();
-        for (NoticeDO noticeDO : noticeDOList) {
-            NoticeDTO noticeDTO = new NoticeDTO();
-            noticeDTO.setId(noticeDO.getId());
-            noticeDTO.setTitle(noticeDO.getTitle());
-//            noticeDTO.setCreateUserName(noticeDO.getCreatUser());
-            noticeDTO.setSendStatus(noticeDO.getSendStatus());
-            noticeDTO.setCreateTime(noticeDO.getCreateTime());
-            noticeDTOList.add(noticeDTO);
-        }
         PageInfo pageInfo = new PageInfo(page.getResult());
-        pageInfo.setList(noticeDTOList);
+        pageInfo.setList(noticeConvertor.toDTOList(noticeDOList));
         return pageInfo;
     }
 
@@ -49,47 +40,21 @@ public class NoticeServiceImpl implements NoticeService {
     public PageInfo<NoticeDTO> findNoticeByPage(NoticeQueryDTO noticeQueryDTO) {
         Page page = PageHelper.startPage(noticeQueryDTO.getPageNum(), noticeQueryDTO.getPageSize());
         List<NoticeDO> noticeDOList = noticeMapper.findByPage(noticeQueryDTO);
-        List<NoticeDTO> noticeDTOList = new ArrayList<>();
-        for (NoticeDO noticeDO : noticeDOList) {
-            NoticeDTO noticeDTO = new NoticeDTO();
-            noticeDTO.setId(noticeDO.getId());
-            noticeDTO.setTitle(noticeDO.getTitle());
-//            noticeDTO.setCreateUserName(noticeDO.getCreatUser());
-            noticeDTO.setSendStatus(noticeDO.getSendStatus());
-            noticeDTO.setCreateTime(noticeDO.getCreateTime());
-            noticeDTO.setUpdateTime(noticeDO.getUpdateTime());
-            noticeDTOList.add(noticeDTO);
-        }
         PageInfo pageInfo = new PageInfo(page.getResult());
-        pageInfo.setList(noticeDTOList);
+        pageInfo.setList(noticeConvertor.toDTOList(noticeDOList));
         return pageInfo;
     }
 
     @Override
     public NoticeDTO findById(Long id) {
         NoticeDO noticeDO = noticeMapper.findById(id);
-        NoticeDTO noticeDTO = new NoticeDTO();
-        noticeDTO.setId(noticeDO.getId());
-        noticeDTO.setTitle(noticeDO.getTitle());
-//            noticeDTO.setCreateUserName(noticeDO.getCreatUser());
-        noticeDTO.setSendStatus(noticeDO.getSendStatus());
-        noticeDTO.setCreateTime(noticeDO.getCreateTime());
-        noticeDTO.setUpdateTime(noticeDO.getUpdateTime());
-        noticeDO.setContent(noticeDO.getContent());
-        return noticeDTO;
+        return noticeConvertor.toDTO(noticeDO);
     }
 
     @Override
     public NoticeDTO readById(Long id) {
         NoticeDO noticeDO = noticeMapper.findById(id);
-        NoticeDTO noticeDTO = new NoticeDTO();
-        noticeDTO.setId(noticeDO.getId());
-        noticeDTO.setTitle(noticeDO.getTitle());
-//            noticeDTO.setCreateUserName(noticeDO.getCreatUser());
-        noticeDTO.setSendStatus(noticeDO.getSendStatus());
-        noticeDTO.setCreateTime(noticeDO.getCreateTime());
-        noticeDTO.setUpdateTime(noticeDO.getUpdateTime());
-        return noticeDTO;
+        return noticeConvertor.toDTO(noticeDO);
     }
 
     @Override
@@ -105,7 +70,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public Boolean save(NoticeAddDTO noticeAddDTO) {
-        NoticeDO noticeDO  = new NoticeDO();
+        NoticeDO noticeDO = new NoticeDO();
         noticeDO.setContent(noticeAddDTO.getContent());
         noticeDO.setTitle(noticeAddDTO.getTitle());
         noticeDO.setDeleted(JudgeEnum.NO.getValue());
@@ -119,4 +84,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Autowired
     private NoticeMapper noticeMapper;
+
+    @Autowired
+    private NoticeConvertor noticeConvertor;
 }
