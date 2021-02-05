@@ -18,5 +18,5 @@ public interface NoticeConvertor {
 
     NoticeDTO toDTO(NoticeDO noticeDO);
 
-    List<NoticeDTO> toDTOList(List<NoticeDO> noticeDO);
+    List<NoticeDTO> toDTOList(List<NoticeDO> noticeDOList);
 }
