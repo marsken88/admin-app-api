@@ -1,6 +1,6 @@
 package org.marsken.plantform.domain.service;
 
-import org.marsken.arch.core.clientobject.PageResultDTO;
+import com.github.pagehelper.PageInfo;
 import org.marsken.plantform.controller.dto.EmployeeDTO;
 import org.marsken.plantform.controller.dto.EmployeeQueryDTO;
 
@@ -13,6 +13,6 @@ import org.marsken.plantform.controller.dto.EmployeeQueryDTO;
  */
 public interface EmployeeService {
 
-    PageResultDTO<EmployeeDTO> findEmployeeByQuery(EmployeeQueryDTO employeeQueryDTO);
+    PageInfo<EmployeeDTO> findEmployeeByQuery(EmployeeQueryDTO employeeQueryDTO);
 
 }
