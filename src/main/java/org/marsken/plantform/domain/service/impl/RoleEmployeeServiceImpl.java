@@ -32,6 +32,12 @@ public class RoleEmployeeServiceImpl implements RoleEmployeeService {
         return pageInfo;
     }
 
+    @Override
+    public List<EmployeeDTO> findEmployeeByRoleId(Long roleId) {
+        List<EmployeeDO> employeeDOList = roleEmployeeMapper.findEmployeeByRoleId(roleId);
+        return employeeConvertor.toDTOList(employeeDOList);
+    }
+
     @Autowired
     private RoleEmployeeMapper roleEmployeeMapper;
 

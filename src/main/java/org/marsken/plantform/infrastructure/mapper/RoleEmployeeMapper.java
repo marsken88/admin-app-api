@@ -16,4 +16,6 @@ public interface RoleEmployeeMapper {
 
    List<EmployeeDO> findEmployeeByNamePage(RoleQueryDTO roleQueryDTO);
 
+   List<EmployeeDO> findEmployeeByRoleId(Long roleId);
+
 }

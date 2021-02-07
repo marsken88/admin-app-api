@@ -36,4 +36,13 @@
         </where>
     </select>
 
+    <select id="findEmployeeByRoleId" resultType="org.marsken.plantform.infrastructure.dataobject.EmployeeDO">
+        select
+        <include refid="Role_Employee_Colum_List"/>
+        from t_role_employee
+                 left join t_employee on t_role_employee.employee_id = t_employee.id
+        where t_role_employee.role_id = #{roleId}
+    </select>
+
+
 </mapper>

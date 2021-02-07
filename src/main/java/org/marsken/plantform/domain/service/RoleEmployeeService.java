@@ -16,4 +16,7 @@ import java.util.List;
 public interface RoleEmployeeService {
 
     PageInfo<EmployeeDTO> findEmployeeByNamePage(RoleQueryDTO roleQueryDTO);
+
+
+    List<EmployeeDTO> findEmployeeByRoleId(Long roleId);
 }
