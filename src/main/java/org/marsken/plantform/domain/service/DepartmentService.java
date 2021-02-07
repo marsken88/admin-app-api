@@ -16,4 +16,12 @@ public interface DepartmentService {
     List<DepartmentDTO> findAll();
 
     List<DepartmentDTO> findEmployeeByDepartmentName(String departmentName);
+
+    Boolean delDepartment(Long departmentId);
+
+    Boolean upOrDown(Long departmentId, Long swapId);
+
+    Boolean upgrade(Long departmentId);
+
+    Boolean downgrade(Long departmentId, Long preId);
 }

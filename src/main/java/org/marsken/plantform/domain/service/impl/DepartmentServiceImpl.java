@@ -12,6 +12,7 @@ import org.marsken.plantform.infrastructure.mapper.DepartmentMapper;
 import org.marsken.plantform.infrastructure.mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -61,6 +62,47 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         });
         return buildTree(departmentDTOList);
+    }
+
+    @Override
+    public Boolean delDepartment(Long departmentId) {
+        departmentMapper.deleteById(departmentId);
+        return Boolean.TRUE;
+    }
+
+    @Transactional
+    @Override
+    public Boolean upOrDown(Long departmentId, Long swapId) {
+        DepartmentDO departmentDO = departmentMapper.findById(departmentId);
+        DepartmentDO swapDepartmentDO = departmentMapper.findById(swapId);
+        if (Objects.nonNull(departmentDO) && Objects.nonNull(swapDepartmentDO)) {
+            departmentMapper.updateSortById(swapDepartmentDO.getSort(), departmentId);
+            departmentMapper.updateSortById(departmentDO.getSort(), swapId);
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    @Override
+    public Boolean upgrade(Long departmentId) {
+        DepartmentDO departmentDO = departmentMapper.findById(departmentId);
+        if (Objects.nonNull(departmentDO) && Objects.nonNull(departmentDO.getParentId())) {
+            DepartmentDO parentDepartmentDO = departmentMapper.findById(departmentDO.getParentId());
+            departmentMapper.updateParentIdById(parentDepartmentDO.getParentId(), departmentId);
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    @Override
+    public Boolean downgrade(Long departmentId, Long preId) {
+        DepartmentDO departmentDO = departmentMapper.findById(departmentId);
+        DepartmentDO preDepartmentDO = departmentMapper.findById(preId);
+        if (Objects.nonNull(departmentDO) && Objects.nonNull(preDepartmentDO)) {
+            departmentMapper.updateParentIdById(preId, departmentId);
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 
 

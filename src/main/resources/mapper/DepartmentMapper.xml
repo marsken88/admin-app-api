@@ -19,12 +19,34 @@
         <include refid="Base_Colum_List"/>
         from t_department
     </select>
+
     <select id="findByName" resultType="org.marsken.plantform.infrastructure.dataobject.DepartmentDO">
         select
         <include refid="Base_Colum_List"/>
         from t_department
         where name = #{name}
     </select>
+
+    <select id="findById" resultType="org.marsken.plantform.infrastructure.dataobject.DepartmentDO">
+        select
+        <include refid="Base_Colum_List"/>
+        from t_department
+        where id = #{id}
+    </select>
+
+    <update id="updateParentIdById">
+        update t_department set parent_id = #{parentId} where id = #{id}
+    </update>
+
+    <update id="updateSortById">
+        update t_department
+        set sort = #{sort}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete t_department where id = #{id}
+    </delete>
 
 
 </mapper>

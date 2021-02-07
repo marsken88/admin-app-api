@@ -1,5 +1,6 @@
 package org.marsken.plantform.infrastructure.mapper;
 
+import org.marsken.plantform.controller.dto.DepartmentDTO;
 import org.marsken.plantform.infrastructure.dataobject.DepartmentDO;
 import org.marsken.plantform.infrastructure.dataobject.RoleDO;
 
@@ -17,4 +18,12 @@ public interface DepartmentMapper {
     List<DepartmentDO> findAll();
 
     List<DepartmentDO> findByName(String name);
+
+    DepartmentDO findById(Long id);
+
+    Integer deleteById(Long id);
+
+    Integer updateSortById(Integer sort, Long id);
+
+    Integer updateParentIdById(Long parentId, Long id);
 }
