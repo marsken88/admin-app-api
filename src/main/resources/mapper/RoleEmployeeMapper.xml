@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.marsken.plantform.infrastructure.mapper.RoleEmployeeMapper">
+
+
+    <sql id="Role_Employee_Colum_List">
+        t_employee.id,
+        login_name,
+        actual_name,
+        nick_name,
+        phone,
+        id_card,
+        birthday,
+        email,
+        department_id,
+        is_leave,
+        is_disabled,
+        t_employee.remark,
+        t_employee.update_time,
+        t_employee.create_time
+    </sql>
+
+    <select id="findEmployeeByNamePage" resultType="org.marsken.plantform.infrastructure.dataobject.EmployeeDO">
+        select
+        <include refid="Role_Employee_Colum_List"/>
+        from t_role_employee
+        left join t_employee on t_role_employee.employee_id = t_employee.id
+        left join t_role on t_role_employee.role_id = t_role.id
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and role_name like "%"#{roleName}"%"
+            </if>
+        </where>
+    </select>
+
+</mapper>
