@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -40,9 +41,8 @@ public class RolePrivilegeServiceImpl implements RolePrivilegeService {
             rootRolePrivilegeSimpleDTO.setSort(rootPrivilegeDO.getSort());
             rootRolePrivilegeSimpleDTO.setType(rootPrivilegeDO.getType());
             rootRolePrivilegeSimpleDTO.setUrl(rootPrivilegeDO.getUrl());
-            rootTreeList.add(rootRolePrivilegeSimpleDTO);
             for (PrivilegeDO privilegeDO : privilegeDOList) {
-                if (privilegeDO.getParentKey().equals(rootPrivilegeDO.getKey())) {
+                if (Objects.nonNull(privilegeDO.getParentKey()) && privilegeDO.getParentKey().equals(rootPrivilegeDO.getKey())) {
                     RolePrivilegeSimpleDTO rolePrivilegeSimpleDTO = new RolePrivilegeSimpleDTO();
                     parentKeyList.add(rootPrivilegeDO.getKey());
                     rolePrivilegeSimpleDTO.setKey(rootPrivilegeDO.getKey());
@@ -52,12 +52,15 @@ public class RolePrivilegeServiceImpl implements RolePrivilegeService {
                     rolePrivilegeSimpleDTO.setType(rootPrivilegeDO.getType());
                     rolePrivilegeSimpleDTO.setUrl(rootPrivilegeDO.getUrl());
                     if (CollectionUtils.isEmpty(rootRolePrivilegeSimpleDTO.getChildren())) {
-                        rootRolePrivilegeSimpleDTO.setChildren(Arrays.asList(rolePrivilegeSimpleDTO));
-                    }else {
+                        List<RolePrivilegeSimpleDTO> list = new ArrayList<>();
+                        list.add(rolePrivilegeSimpleDTO);
+                        rootRolePrivilegeSimpleDTO.setChildren(list);
+                    } else {
                         rootRolePrivilegeSimpleDTO.getChildren().add(rolePrivilegeSimpleDTO);
                     }
                 }
             }
+            rootTreeList.add(rootRolePrivilegeSimpleDTO);
             rolePrivilegeTreeDTO.setRoleId(roleId);
             rolePrivilegeTreeDTO.setPrivileges(rootTreeList);
             return rolePrivilegeTreeDTO;

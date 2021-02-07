@@ -19,7 +19,7 @@ public class RolePrivilegeController {
 
     @GetMapping("/privilege/listPrivilegeByRoleId/{roleId}")
     public ResponseDTO listPrivilegeByRoleId(@PathVariable Long roleId) {
-        return ResponseDTO.builderSuccess(null);
+        return ResponseDTO.builderSuccess(rolePrivilegeService.listPrivilegeByRoleId(roleId));
     }
 
     @Autowired
