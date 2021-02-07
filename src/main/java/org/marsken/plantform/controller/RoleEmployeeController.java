@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import org.marsken.arch.core.clientobject.ResponseDTO;
 import org.marsken.plantform.controller.dto.EmployeeDTO;
 import org.marsken.plantform.controller.dto.RoleQueryDTO;
+import org.marsken.plantform.controller.dto.RoleSelectedDTO;
 import org.marsken.plantform.domain.service.RoleEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author ：MarsKen
@@ -29,8 +32,13 @@ public class RoleEmployeeController {
     }
 
     @GetMapping(value = "/role/listAllEmployee/{roleId}")
-    public ResponseDTO<EmployeeDTO> findEmployeeByRoleId(@PathVariable Long roleId){
+    public ResponseDTO<EmployeeDTO> findEmployeeByRoleId(@PathVariable Long roleId) {
         return ResponseDTO.builderSuccess(roleEmployeeService.findEmployeeByRoleId(roleId));
+    }
+
+    @GetMapping(value = "/role/getRoles/{employeeId}")
+    public ResponseDTO<List<RoleSelectedDTO>> findRoleByEmployeeId(@PathVariable Long employeeId) {
+        return ResponseDTO.builderSuccess(roleEmployeeService.findRoleByEmployeeId(employeeId));
     }
 
     @Autowired

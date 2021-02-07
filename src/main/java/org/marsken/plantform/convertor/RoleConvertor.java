@@ -1,7 +1,9 @@
 package org.marsken.plantform.convertor;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Named;
 import org.marsken.plantform.controller.dto.RoleDTO;
+import org.marsken.plantform.controller.dto.RoleSelectedDTO;
 import org.marsken.plantform.infrastructure.dataobject.RoleDO;
 
 import java.util.List;
@@ -18,4 +20,9 @@ public interface RoleConvertor {
     RoleDTO toDTO(RoleDO roleDO);
 
     List<RoleDTO> toDTOList(List<RoleDO> roleDOList);
+
+    @Named(value = "toSelectedDTO")
+    RoleSelectedDTO toSelectedDTO(RoleDO roleDO);
+
+    List<RoleSelectedDTO> toSelectedDTOList(List<RoleDO> roleDOList);
 }

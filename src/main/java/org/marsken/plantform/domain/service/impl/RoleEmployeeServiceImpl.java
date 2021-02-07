@@ -5,10 +5,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.marsken.plantform.controller.dto.EmployeeDTO;
 import org.marsken.plantform.controller.dto.RoleQueryDTO;
+import org.marsken.plantform.controller.dto.RoleSelectedDTO;
 import org.marsken.plantform.convertor.EmployeeConvertor;
+import org.marsken.plantform.convertor.RoleConvertor;
 import org.marsken.plantform.domain.service.RoleEmployeeService;
 import org.marsken.plantform.infrastructure.dataobject.EmployeeDO;
+import org.marsken.plantform.infrastructure.dataobject.RoleDO;
 import org.marsken.plantform.infrastructure.mapper.RoleEmployeeMapper;
+import org.marsken.plantform.infrastructure.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,9 +42,24 @@ public class RoleEmployeeServiceImpl implements RoleEmployeeService {
         return employeeConvertor.toDTOList(employeeDOList);
     }
 
+    @Override
+    public List<RoleSelectedDTO> findRoleByEmployeeId(Long employeeId) {
+        List<Long> roleIdList = roleEmployeeMapper.findRoleIdsByEmployeeId(employeeId);
+        List<RoleDO> roleDOList = roleMapper.findAll();
+        List<RoleSelectedDTO> roleSelectedDTOList = roleConvertor.toSelectedDTOList(roleDOList);
+        roleSelectedDTOList.forEach(roleDTO -> roleDTO.setSelected(roleIdList.contains(roleDTO.getId())));
+        return roleSelectedDTOList;
+    }
+
     @Autowired
     private RoleEmployeeMapper roleEmployeeMapper;
 
     @Autowired
     private EmployeeConvertor employeeConvertor;
+
+    @Autowired
+    private RoleMapper roleMapper;
+
+    @Autowired
+    private RoleConvertor roleConvertor;
 }
