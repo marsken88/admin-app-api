@@ -19,9 +19,14 @@ import java.util.List;
 @RestController
 public class DepartmentController {
 
-    @GetMapping("/department/listEmployee")
+    @GetMapping(value = "/department/listEmployee")
     public ResponseDTO<List<DepartmentDTO>> listDepartmentEmployee() {
         return ResponseDTO.builderSuccess(departmentService.findAll());
+    }
+
+    @GetMapping(value = "/department/listEmployeeByDepartmentName")
+    public ResponseDTO<List<DepartmentDTO>> listEmployeeByDepartmentName(String departmentName) {
+        return ResponseDTO.builderSuccess(departmentService.findEmployeeByDepartmentName(departmentName));
     }
 
     @Autowired

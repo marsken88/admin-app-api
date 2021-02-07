@@ -3,6 +3,7 @@ package org.marsken.plantform.controller.dto;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author ：MarsKen
@@ -30,6 +31,11 @@ public class DepartmentDTO {
 
     private Date createTime;
 
+    private List<EmployeeDTO> employees;
 
+    private List<DepartmentDTO> children;
 
+    private Long preId;
+
+    private Long nextId;
 }

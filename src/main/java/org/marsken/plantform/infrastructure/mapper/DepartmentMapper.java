@@ -15,4 +15,6 @@ import java.util.List;
 public interface DepartmentMapper {
 
     List<DepartmentDO> findAll();
+
+    List<DepartmentDO> findByName(String name);
 }

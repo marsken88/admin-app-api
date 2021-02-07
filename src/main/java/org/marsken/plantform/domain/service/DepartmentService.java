@@ -14,4 +14,6 @@ import java.util.List;
 public interface DepartmentService {
 
     List<DepartmentDTO> findAll();
+
+    List<DepartmentDTO> findEmployeeByDepartmentName(String departmentName);
 }
