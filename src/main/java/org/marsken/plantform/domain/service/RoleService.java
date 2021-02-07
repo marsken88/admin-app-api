@@ -1,5 +1,6 @@
 package org.marsken.plantform.domain.service;
 
+import org.marsken.plantform.controller.dto.RoleAddDTO;
 import org.marsken.plantform.controller.dto.RoleDTO;
 
 import java.util.List;
@@ -14,4 +15,6 @@ import java.util.List;
 public interface RoleService {
 
     List<RoleDTO> findAllRole();
+
+    Boolean save(RoleAddDTO roleAddDTO);
 }

@@ -1,5 +1,6 @@
 package org.marsken.plantform.domain.service.impl;
 
+import org.marsken.plantform.controller.dto.RoleAddDTO;
 import org.marsken.plantform.controller.dto.RoleDTO;
 import org.marsken.plantform.convertor.RoleConvertor;
 import org.marsken.plantform.domain.service.RoleService;
@@ -8,6 +9,7 @@ import org.marsken.plantform.infrastructure.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +27,18 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleDTO> findAllRole() {
         List<RoleDO> roleDOList = roleMapper.findAll();
         return roleConvertor.toDTOList(roleDOList);
+    }
+
+    @Override
+    public Boolean save(RoleAddDTO roleAddDTO) {
+        RoleDO roleDO = new RoleDO();
+        roleDO.setRoleName(roleAddDTO.getRoleName());
+        roleDO.setRemark(roleAddDTO.getRemark());
+        Date now = new Date();
+        roleDO.setCreateTime(now);
+        roleDO.setUpdateTime(now);
+        roleMapper.save(roleDO);
+        return Boolean.TRUE;
     }
 
     @Autowired

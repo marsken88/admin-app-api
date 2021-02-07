@@ -1,10 +1,13 @@
 package org.marsken.plantform.controller;
 
 import org.marsken.arch.core.clientobject.ResponseDTO;
+import org.marsken.plantform.controller.dto.RoleAddDTO;
 import org.marsken.plantform.controller.dto.RoleDTO;
 import org.marsken.plantform.domain.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,6 +25,11 @@ public class RoleController {
     @GetMapping(value = "/role/getAll")
     public ResponseDTO<List<RoleDTO>> findAllRole() {
         return ResponseDTO.builderSuccess(roleService.findAllRole());
+    }
+
+    @PostMapping(value = "/role/add")
+    public ResponseDTO<Boolean> save(@RequestBody RoleAddDTO roleAddDTO) {
+        return ResponseDTO.builderSuccess(roleService.save(roleAddDTO));
     }
 
     @Autowired

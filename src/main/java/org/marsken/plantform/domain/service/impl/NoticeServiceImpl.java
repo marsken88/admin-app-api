@@ -75,8 +75,9 @@ public class NoticeServiceImpl implements NoticeService {
         noticeDO.setTitle(noticeAddDTO.getTitle());
         noticeDO.setDeleted(JudgeEnum.NO.getValue());
         noticeDO.setSendStatus(JudgeEnum.NO.getValue());
-        noticeDO.setCreateTime(new Date());
-        noticeDO.setUpdateTime(new Date());
+        Date now = new Date();
+        noticeDO.setCreateTime(now);
+        noticeDO.setUpdateTime(now);
         noticeDO.setCreatUser(1L);
         noticeMapper.save(noticeDO);
         return Boolean.TRUE;

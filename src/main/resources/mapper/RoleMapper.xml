@@ -17,4 +17,10 @@
         from t_role
     </select>
 
+    <insert id="save">
+        insert into t_role (role_name, remark, update_time, create_time)
+        values (#{roleName}, #{remark}, #{updateTime}, #{createTime})
+
+    </insert>
+
 </mapper>
