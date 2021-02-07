@@ -45,7 +45,7 @@
     </update>
 
     <delete id="deleteById">
-        delete t_department where id = #{id}
+        delete from  t_department where id = #{id}
     </delete>
 
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.marsken.plantform.infrastructure.mapper.PositionMapper">
+
+
+    <sql id="Base_Colum_List">
+        id,
+        position_name,
+        remark,
+        update_time,
+        create_time
+    </sql>
+
+    <select id="findByQueryPage" resultType="org.marsken.plantform.infrastructure.dataobject.PositionDO">
+        select
+        <include refid="Base_Colum_List"/>
+        from t_position
+        where 1=1
+        <if test="positionName != null and positionName !=''">
+            position_name like "%"#{positionName}"%"
+        </if>
+    </select>
+
+    <update id="updatePostionNameAndRemarkById">
+        update t_position set position_name=#{positionName} , remark=#{remark} where id = #{id}
+    </update>
+
+    <insert id="save">
+        insert into t_position (position_name, remark, update_time, create_time)
+        values (#{positionName}, #{remark}, #{updateTime}, #{createTime})
+    </insert>
+    <delete id="remove">
+        delete from t_position where id = #{id}
+    </delete>
+
+</mapper>
