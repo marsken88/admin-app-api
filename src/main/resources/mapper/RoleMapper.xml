@@ -22,5 +22,11 @@
         values (#{roleName}, #{remark}, #{updateTime}, #{createTime})
 
     </insert>
+    <select id="findById" resultType="org.marsken.plantform.infrastructure.dataobject.RoleDO">
+        select
+        <include refid="Base_Colum_List"/>
+        from t_role
+        where id = {roleId}
+    </select>
 
 </mapper>

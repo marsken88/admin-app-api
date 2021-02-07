@@ -16,4 +16,6 @@ public interface RoleMapper {
     List<RoleDO> findAll();
 
     Boolean save(RoleDO roleDO);
+
+    RoleDO findById(Long roleId);
 }

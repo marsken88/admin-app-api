@@ -17,4 +17,6 @@ public interface RoleService {
     List<RoleDTO> findAllRole();
 
     Boolean save(RoleAddDTO roleAddDTO);
+
+    RoleDTO findById(Long roleId);
 }

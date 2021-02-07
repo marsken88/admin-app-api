@@ -41,6 +41,12 @@ public class RoleServiceImpl implements RoleService {
         return Boolean.TRUE;
     }
 
+    @Override
+    public RoleDTO findById(Long roleId) {
+        RoleDO roleDO = roleMapper.findById(roleId);
+        return roleConvertor.toDTO(roleDO);
+    }
+
     @Autowired
     private RoleMapper roleMapper;
 
