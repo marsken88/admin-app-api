@@ -44,7 +44,7 @@ public class EmployeeDTO {
 
     private Date createTime;
 
-    private Data updateTime;
+    private Date updateTime;
 
     private Integer isDelete;
 

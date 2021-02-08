@@ -1,6 +1,7 @@
 package org.marsken.plantform.convertor;
 
 import org.mapstruct.Mapper;
+import org.marsken.plantform.controller.dto.EmployeeAddDTO;
 import org.marsken.plantform.controller.dto.EmployeeDTO;
 import org.marsken.plantform.controller.dto.RoleDTO;
 import org.marsken.plantform.infrastructure.dataobject.EmployeeDO;
@@ -20,4 +21,6 @@ public interface EmployeeConvertor {
     EmployeeDTO toDTO(EmployeeDO employeeDO);
 
     List<EmployeeDTO> toDTOList(List<EmployeeDO> employeeDOList);
+
+    EmployeeDO toDO(EmployeeAddDTO employeeAddDTO);
 }

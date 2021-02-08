@@ -19,4 +19,6 @@ public interface EmployeeMapper {
     EmployeeDO findByLoginNameAndLoginPwd(String loginName, String loginPwd);
 
     List<EmployeeDO> findEmployeeByQueryDTO(EmployeeQueryDTO employeeQueryDTO);
+
+    Long save(EmployeeDO employeeDO);
 }

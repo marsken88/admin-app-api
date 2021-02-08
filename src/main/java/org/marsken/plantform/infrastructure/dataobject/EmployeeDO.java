@@ -43,7 +43,7 @@ public class EmployeeDO {
 
     private Date createTime;
 
-    private Data updateTime;
+    private Date updateTime;
 
     private Integer isDelete;
 }

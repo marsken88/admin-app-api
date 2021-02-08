@@ -25,7 +25,10 @@
     </sql>
 
     <sql id="Employee_Department_Colum_List">
-        t_employee.id,
+        t_employee
+        .
+        id
+        ,
         login_name,
         actual_name,
         nick_name,
@@ -64,5 +67,11 @@
             and t_department.id = #{departmentId}
         </if>
     </select>
+    <insert id="save">
+        insert into t_employee (login_name, login_pwd, actual_name, nick_name, phone, id_card, birthday, email,
+                                department_id, remark, create_user)
+        values (#{loginName}, #{loginPwd}, #{actualName}, #{nickName}, #{phone}, #{idCard}, #{birthday}, #{email},
+                #{departmentId}, #{remark}, #{createUser})
+    </insert>
 
 </mapper>
