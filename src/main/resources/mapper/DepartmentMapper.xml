@@ -51,7 +51,9 @@
     <insert id="save">
         insert into t_department (name,parent_id,type,update_time,create_time)
         values (${name},#{parentId},${type},${updateTime},${createTime})
-    </insert>>
+
+
+    </insert>
 
 
 </mapper>
