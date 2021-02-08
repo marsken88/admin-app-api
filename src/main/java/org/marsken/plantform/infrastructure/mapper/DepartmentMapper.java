@@ -26,4 +26,6 @@ public interface DepartmentMapper {
     Integer updateSortById(Integer sort, Long id);
 
     Integer updateParentIdById(Long parentId, Long id);
+
+    Long save(DepartmentDO departmentDO);
 }

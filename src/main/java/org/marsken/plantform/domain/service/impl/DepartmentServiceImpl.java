@@ -1,6 +1,7 @@
 package org.marsken.plantform.domain.service.impl;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.marsken.plantform.controller.dto.DepartmentAddDTO;
 import org.marsken.plantform.controller.dto.DepartmentDTO;
 import org.marsken.plantform.controller.dto.EmployeeDTO;
 import org.marsken.plantform.convertor.DepartmentConvertor;
@@ -103,6 +104,15 @@ public class DepartmentServiceImpl implements DepartmentService {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
+    }
+
+    @Override
+    public Boolean save(DepartmentAddDTO departmentAddDTO) {
+        DepartmentDO departmentDO = new DepartmentDO();
+        departmentDO.setParentId(departmentAddDTO.getParentId());
+        departmentDO.setName(departmentAddDTO.getName());
+        Long id = departmentMapper.save(departmentDO);
+        return Boolean.TRUE;
     }
 
 

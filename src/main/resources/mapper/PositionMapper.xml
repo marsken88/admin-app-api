@@ -17,7 +17,7 @@
         from t_position
         where 1=1
         <if test="positionName != null and positionName !=''">
-            position_name like "%"#{positionName}"%"
+            and position_name like "%"#{positionName}"%"
         </if>
     </select>
 

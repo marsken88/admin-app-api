@@ -1,5 +1,6 @@
 package org.marsken.plantform.domain.service;
 
+import org.marsken.plantform.controller.dto.DepartmentAddDTO;
 import org.marsken.plantform.controller.dto.DepartmentDTO;
 
 import java.util.List;
@@ -24,4 +25,6 @@ public interface DepartmentService {
     Boolean upgrade(Long departmentId);
 
     Boolean downgrade(Long departmentId, Long preId);
+
+    Boolean save(DepartmentAddDTO departmentAddDTO);
 }

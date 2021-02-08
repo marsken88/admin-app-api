@@ -1,12 +1,14 @@
 package org.marsken.plantform.controller;
 
 import org.marsken.arch.core.clientobject.ResponseDTO;
+import org.marsken.plantform.controller.dto.DepartmentAddDTO;
 import org.marsken.plantform.controller.dto.DepartmentDTO;
 import org.marsken.plantform.domain.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -49,6 +51,11 @@ public class DepartmentController {
     @GetMapping(value = "/department/downgrade/{departmentId}/{preId}")
     public ResponseDTO<Boolean> downgrade(@PathVariable Long departmentId, @PathVariable Long preId) {
         return ResponseDTO.builderSuccess(departmentService.downgrade(departmentId, preId));
+    }
+
+    @PostMapping(value = "/department/add")
+    public ResponseDTO<Boolean> save(@RequestBody DepartmentAddDTO departmentAddDTO) {
+        return ResponseDTO.builderSuccess(departmentService.save(departmentAddDTO));
     }
 
     @Autowired
