@@ -18,4 +18,8 @@ public interface RoleMapper {
     Boolean save(RoleDO roleDO);
 
     RoleDO findById(Long roleId);
+
+    Integer removeById(Long id);
+
+    Integer updateRoleNameAndRemarkById(String roleName, String remark, Long id);
 }

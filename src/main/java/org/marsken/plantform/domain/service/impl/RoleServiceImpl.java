@@ -47,6 +47,18 @@ public class RoleServiceImpl implements RoleService {
         return roleConvertor.toDTO(roleDO);
     }
 
+    @Override
+    public Boolean removeById(Long id) {
+        roleMapper.removeById(id);
+        return Boolean.TRUE;
+    }
+
+    @Override
+    public Boolean update(RoleAddDTO roleAddDTO) {
+        roleMapper.updateRoleNameAndRemarkById(roleAddDTO.getRoleName(), roleAddDTO.getRemark(), roleAddDTO.getId());
+        return Boolean.TRUE;
+    }
+
     @Autowired
     private RoleMapper roleMapper;
 

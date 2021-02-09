@@ -22,11 +22,20 @@
         values (#{roleName}, #{remark}, #{updateTime}, #{createTime})
 
     </insert>
+
     <select id="findById" resultType="org.marsken.plantform.infrastructure.dataobject.RoleDO">
         select
         <include refid="Base_Colum_List"/>
         from t_role
         where id = {roleId}
     </select>
+
+    <delete id="removeById">
+        delete from t_role where id = #{id}
+    </delete>
+
+    <update id="updateRoleNameAndRemarkById">
+        update t_role set role_name = #{roleName}, remark = #{remark} where id = #{id}
+    </update>
 
 </mapper>

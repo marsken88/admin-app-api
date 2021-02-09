@@ -19,4 +19,8 @@ public interface RoleService {
     Boolean save(RoleAddDTO roleAddDTO);
 
     RoleDTO findById(Long roleId);
+
+    Boolean removeById(Long id);
+
+    Boolean update(RoleAddDTO roleAddDTO);
 }

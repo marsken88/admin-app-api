@@ -38,6 +38,16 @@ public class RoleController {
         return ResponseDTO.builderSuccess(roleService.findById(roleId));
     }
 
+    @GetMapping(value = "/role/delete/{id}")
+    public ResponseDTO<Boolean> removeById(@PathVariable Long id) {
+        return ResponseDTO.builderSuccess(roleService.removeById(id));
+    }
+
+    @PostMapping(value = "/role/update")
+    public ResponseDTO<Boolean> update(@RequestBody RoleAddDTO roleAddDTO) {
+        return ResponseDTO.builderSuccess(roleService.update(roleAddDTO));
+    }
+
     @Autowired
     private RoleService roleService;
 }

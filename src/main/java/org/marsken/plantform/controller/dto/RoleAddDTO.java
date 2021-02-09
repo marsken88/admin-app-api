@@ -11,6 +11,9 @@ import lombok.Data;
  */
 @Data
 public class RoleAddDTO {
+
+    private Long id;
+
     private String roleName;
 
     private String remark;
