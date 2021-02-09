@@ -25,7 +25,7 @@ public class DepartmentController {
 
     @GetMapping(value = "/department/listEmployee")
     public ResponseDTO<List<DepartmentDTO>> listDepartmentEmployee() {
-        return ResponseDTO.builderSuccess(departmentService.findAll());
+        return ResponseDTO.builderSuccess(departmentService.findEmployeeByDepartmentName(null));
     }
 
     @GetMapping(value = "/department/listEmployeeByDepartmentName")
