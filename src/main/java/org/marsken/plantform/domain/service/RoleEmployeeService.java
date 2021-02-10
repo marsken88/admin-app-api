@@ -2,6 +2,7 @@ package org.marsken.plantform.domain.service;
 
 import com.github.pagehelper.PageInfo;
 import org.marsken.plantform.controller.dto.EmployeeDTO;
+import org.marsken.plantform.controller.dto.EmployeeUpdateRolesDTO;
 import org.marsken.plantform.controller.dto.RoleQueryDTO;
 import org.marsken.plantform.controller.dto.RoleSelectedDTO;
 
@@ -22,4 +23,7 @@ public interface RoleEmployeeService {
     List<EmployeeDTO> findEmployeeByRoleId(Long roleId);
 
     List<RoleSelectedDTO> findRoleByEmployeeId(Long employeeId);
+
+    Boolean updateRoles(EmployeeUpdateRolesDTO employeeUpdateRolesDTO);
+
 }

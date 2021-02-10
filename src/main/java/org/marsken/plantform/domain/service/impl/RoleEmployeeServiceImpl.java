@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.marsken.plantform.controller.dto.EmployeeDTO;
+import org.marsken.plantform.controller.dto.EmployeeUpdateRolesDTO;
 import org.marsken.plantform.controller.dto.RoleQueryDTO;
 import org.marsken.plantform.controller.dto.RoleSelectedDTO;
 import org.marsken.plantform.convertor.EmployeeConvertor;
@@ -11,11 +12,14 @@ import org.marsken.plantform.convertor.RoleConvertor;
 import org.marsken.plantform.domain.service.RoleEmployeeService;
 import org.marsken.plantform.infrastructure.dataobject.EmployeeDO;
 import org.marsken.plantform.infrastructure.dataobject.RoleDO;
+import org.marsken.plantform.infrastructure.dataobject.RoleEmployeeDO;
 import org.marsken.plantform.infrastructure.mapper.RoleEmployeeMapper;
 import org.marsken.plantform.infrastructure.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +31,7 @@ import java.util.List;
  */
 @Service
 public class RoleEmployeeServiceImpl implements RoleEmployeeService {
+
     @Override
     public PageInfo<EmployeeDTO> findEmployeeByNamePage(RoleQueryDTO roleQueryDTO) {
         Page page = PageHelper.startPage(roleQueryDTO.getPageNum(), roleQueryDTO.getPageSize());
@@ -50,6 +55,22 @@ public class RoleEmployeeServiceImpl implements RoleEmployeeService {
         roleSelectedDTOList.forEach(roleDTO -> roleDTO.setSelected(roleIdList.contains(roleDTO.getId())));
         return roleSelectedDTOList;
     }
+
+    @Transactional
+    @Override
+    public Boolean updateRoles(EmployeeUpdateRolesDTO employeeUpdateRolesDTO) {
+        List<RoleEmployeeDO> roleEmployeeDOList = new ArrayList<>();
+        for (Long roleId : employeeUpdateRolesDTO.getRoleIds()) {
+            RoleEmployeeDO roleEmployeeDO = new RoleEmployeeDO();
+            roleEmployeeDO.setEmployeeId(employeeUpdateRolesDTO.getEmployeeId());
+            roleEmployeeDO.setRoleId(roleId);
+            roleEmployeeDOList.add(roleEmployeeDO);
+        }
+        roleEmployeeMapper.removeByEmployeeId(employeeUpdateRolesDTO.getEmployeeId());
+        roleEmployeeMapper.saveBatch(roleEmployeeDOList);
+        return Boolean.TRUE;
+    }
+
 
     @Autowired
     private RoleEmployeeMapper roleEmployeeMapper;

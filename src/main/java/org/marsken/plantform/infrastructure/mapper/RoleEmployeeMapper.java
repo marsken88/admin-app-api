@@ -21,4 +21,8 @@ public interface RoleEmployeeMapper {
 
    List<Long> findRoleIdsByEmployeeId(Long employeeId);
 
+   Integer removeByEmployeeId(Long employeeId);
+
+   Integer saveBatch(List<RoleEmployeeDO> roleEmployeeDOList);
+
 }

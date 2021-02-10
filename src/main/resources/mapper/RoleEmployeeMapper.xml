@@ -58,5 +58,19 @@
         where employee_id = #{employeeId}
     </select>
 
+    <delete id="removeByEmployeeId">
+        delete from t_role_employee where employee_id = #{employeeId}
+    </delete>
+
+    <insert id="saveBatch">
+        insert into t_role_employee (role_id, employee_id)
+        values
+        <foreach collection="list" item="bind" separator=",">
+            (
+            #{bind.roleId}, #{bind.employeeId}
+            )
+        </foreach>
+    </insert>
+
 
 </mapper>

@@ -3,6 +3,7 @@ package org.marsken.plantform.controller;
 import com.github.pagehelper.PageInfo;
 import org.marsken.arch.core.clientobject.ResponseDTO;
 import org.marsken.plantform.controller.dto.EmployeeDTO;
+import org.marsken.plantform.controller.dto.EmployeeUpdateRolesDTO;
 import org.marsken.plantform.controller.dto.RoleQueryDTO;
 import org.marsken.plantform.controller.dto.RoleSelectedDTO;
 import org.marsken.plantform.domain.service.RoleEmployeeService;
@@ -40,6 +41,13 @@ public class RoleEmployeeController {
     public ResponseDTO<List<RoleSelectedDTO>> findRoleByEmployeeId(@PathVariable Long employeeId) {
         return ResponseDTO.builderSuccess(roleEmployeeService.findRoleByEmployeeId(employeeId));
     }
+
+
+    @PostMapping(value = "/employee/updateRoles")
+    public ResponseDTO<Boolean> updateRoles(@RequestBody EmployeeUpdateRolesDTO employeeUpdateRolesDTO) {
+        return ResponseDTO.builderSuccess(roleEmployeeService.updateRoles(employeeUpdateRolesDTO));
+    }
+
 
     @Autowired
     private RoleEmployeeService roleEmployeeService;
