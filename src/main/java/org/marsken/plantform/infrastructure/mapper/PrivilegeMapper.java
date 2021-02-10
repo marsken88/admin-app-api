@@ -14,4 +14,6 @@ import java.util.List;
 public interface PrivilegeMapper {
 
     List<PrivilegeDO> findAll();
+
+    List<PrivilegeDO> findByType(Integer type);
 }

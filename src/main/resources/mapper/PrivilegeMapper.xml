@@ -21,4 +21,11 @@
         from t_privilege
     </select>
 
+    <select id="findByType" resultType="org.marsken.plantform.infrastructure.dataobject.PrivilegeDO">
+        select
+        <include refid="Base_Colum_List"/>
+        from t_privilege
+        where type  = #{type}
+    </select>
+
 </mapper>
