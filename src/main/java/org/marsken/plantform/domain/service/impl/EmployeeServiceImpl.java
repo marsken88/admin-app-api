@@ -71,6 +71,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         return Boolean.TRUE;
     }
 
+    @Override
+    public Boolean resetPasswd(Long employeeId) {
+        String password = AdminDigestUtil.encryptPassword(CommonConstant.SALT_FORMAT, CommonConstant.DEFAULT_PASSWORD);
+        employeeMapper.updatePasswordById(password, employeeId);
+        return Boolean.TRUE;
+    }
+
     @Autowired
     private EmployeeMapper employeeMapper;
 

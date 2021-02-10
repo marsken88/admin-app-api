@@ -9,4 +9,5 @@ package org.marsken.plantform.domain.constant;
  */
 public class CommonConstant {
     public static final String SALT_FORMAT = "admin_%s_pwd";
+    public static final String DEFAULT_PASSWORD = "123456";
 }

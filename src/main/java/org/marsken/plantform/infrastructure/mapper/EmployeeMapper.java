@@ -25,4 +25,6 @@ public interface EmployeeMapper {
     Integer updateStatusByIds(Integer status,List<Long> idList);
 
     Integer updateStatusById(Long id, Integer status);
+
+    Integer updatePasswordById(String password, Long id);
 }

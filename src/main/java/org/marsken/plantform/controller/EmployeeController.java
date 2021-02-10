@@ -44,6 +44,11 @@ public class EmployeeController {
         return ResponseDTO.builderSuccess(employeeService.updateStatus(employeeId, status));
     }
 
+    @GetMapping(value = "/employee/resetPasswd/#{employeeId}")
+    public ResponseDTO<Boolean> resetPasswd(@PathVariable Long employeeId) {
+        return ResponseDTO.builderSuccess(employeeService.resetPasswd(employeeId));
+    }
+
     @Autowired
     private EmployeeService employeeService;
 }

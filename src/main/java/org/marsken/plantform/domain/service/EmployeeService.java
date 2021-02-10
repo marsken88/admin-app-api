@@ -22,4 +22,6 @@ public interface EmployeeService {
     Boolean batchUpdateStatus(EmployeeBatchUpdateStatusDTO employeeBatchUpdateStatusDTO);
 
     Boolean updateStatus(Long employeeId, Integer status);
+
+    Boolean resetPasswd(Long employeeId);
 }
