@@ -51,6 +51,7 @@
         <include refid="Base_Colum_List"/>
         from t_employee
     </select>
+
     <select id="findByLoginNameAndLoginPwd" resultType="org.marsken.plantform.infrastructure.dataobject.EmployeeDO">
         select
         <include refid="Base_Colum_List"/>
@@ -58,6 +59,7 @@
         where login_name = #{loginName}
         and login_pwd = #{loginPwd}
     </select>
+
     <select id="findEmployeeByQueryDTO" resultType="org.marsken.plantform.infrastructure.dataobject.EmployeeDO">
         select
         <include refid="Employee_Department_Colum_List"/>
@@ -66,12 +68,30 @@
         <if test="departmentId != null and departmentId != ''">
             and t_department.id = #{departmentId}
         </if>
+        <if test="isDisabled != null and isDisabled != ''">
+            and t_employee.is_disabled = #{isDisabled}
+        </if>
     </select>
+
     <insert id="save">
         insert into t_employee (login_name, login_pwd, actual_name, nick_name, phone, id_card, birthday, email,
                                 department_id, remark, create_user)
         values (#{loginName}, #{loginPwd}, #{actualName}, #{nickName}, #{phone}, #{idCard}, #{birthday}, #{email},
                 #{departmentId}, #{remark}, #{createUser})
     </insert>
+
+    <update id="updateStatusByIds">
+        update t_employee set is_disabled = #{status} where
+        <foreach collection="idList" item="id" index="index" separator=","
+                 open="id in (" close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="updateStatusById">
+        update t_employee
+        set is_disabled = #{status} where
+        id = #{id}
+    </update>
 
 </mapper>

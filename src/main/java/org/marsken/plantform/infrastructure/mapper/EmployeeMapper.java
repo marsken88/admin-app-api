@@ -21,4 +21,8 @@ public interface EmployeeMapper {
     List<EmployeeDO> findEmployeeByQueryDTO(EmployeeQueryDTO employeeQueryDTO);
 
     Long save(EmployeeDO employeeDO);
+
+    Integer updateStatusByIds(Integer status,List<Long> idList);
+
+    Integer updateStatusById(Long id, Integer status);
 }
